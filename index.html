@@ -2,81 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portofolio Smooth Scroll</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
 
+    /* Reset & base */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     html {
       scroll-behavior: smooth;
     }
-
     body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
       background-color: #0b0d1a;
       color: #fff;
       font-family: "Segoe UI", sans-serif;
       overflow-x: hidden;
     }
 
+    /* Header fixed nav */
     header {
-      padding: 30px 60px;
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: #0b0d1a;
+      background: #0b0d1a;
       z-index: 1000;
+      padding: 30px 60px;
     }
-
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
       gap: 30px;
+      flex-wrap: wrap;
     }
-
     nav a {
       color: #fff;
       text-decoration: none;
       font-weight: 600;
       font-size: 16px;
-      transition: color 0.3s, font-size 0.3s;
+      transition: color 0.4s ease, font-size 0.4s ease;
+      will-change: color, font-size;
     }
-
     nav a:hover {
       color: #29ab87;
       font-size: 18px;
     }
 
+    /* Sections */
     section {
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Cinzel', serif;
-      font-size: 80px;
+      font-size: 88px; /* naik dari 80px */
       letter-spacing: 3px;
       color: #f5e9c7;
-      text-shadow: 0 0 1px rgba(255,255,255,0.2);
+      text-shadow:
+        0 0 3px rgba(255, 255, 255, 0.15),
+        0 0 10px rgba(255, 255, 255, 0.1);
       text-align: center;
       padding: 80px 10px 20px;
       flex-direction: column;
     }
 
+    /* Efek besar dan smooth di #home dan #certificate */
     #home h1 {
-      font-size: 140px;
+      font-size: 160px; /* sebelumnya 140px */
+      transition: font-size 0.5s ease, color 0.5s ease, text-shadow 0.5s ease;
+      text-shadow:
+        0 0 8px rgba(41, 171, 135, 0.6),
+        0 0 20px rgba(41, 171, 135, 0.4),
+        0 0 30px rgba(41, 171, 135, 0.3);
+    }
+    #home h1:hover {
+      font-size: 170px;
+      color: #3cd3a7;
+      text-shadow:
+        0 0 12px rgba(60, 211, 167, 0.8),
+        0 0 25px rgba(60, 211, 167, 0.7),
+        0 0 40px rgba(60, 211, 167, 0.5);
     }
 
+    /* About text */
     .hero-text h4 {
       color: #29ab87;
       font-weight: bold;
@@ -84,50 +100,52 @@
       margin-bottom: 15px;
       letter-spacing: 2px;
     }
-
     .hero-text h1 {
       font-size: 64px;
       font-weight: bold;
       margin-bottom: 25px;
     }
-
-    .hero-text p {
+    #animated-text {
       max-width: 700px;
       margin: 0 auto 40px;
       font-size: 20px;
       line-height: 1.8;
       color: #ccc;
+      user-select: none;
     }
 
+    /* Highlighted words */
     .word, .phrase {
       display: inline-block;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
       cursor: default;
+      will-change: transform, color;
     }
-
     .hovered {
-      transform: scale(1.4);
+      transform: scale(1.6);
       color: #29ab87;
-      z-index: 10;
       position: relative;
+      z-index: 10;
     }
-
     .shift-left {
       transform: translateX(-20px);
       color: #666;
+      transition: transform 0.4s ease, color 0.3s ease;
+      will-change: transform, color;
     }
-
     .shift-right {
       transform: translateX(20px);
       color: #666;
+      transition: transform 0.4s ease, color 0.3s ease;
+      will-change: transform, color;
     }
 
+    /* Social icons */
     .social-icons {
       display: flex;
       justify-content: center;
       gap: 10px;
     }
-
     .social-icons a {
       color: #29ab87;
       border: 1px solid #29ab87;
@@ -139,75 +157,54 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: background-color 0.3s, color 0.3s;
-      animation: pulse 2.5s ease-in-out infinite;
       text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
     }
-
     .social-icons a:hover {
       background-color: #29ab87;
       color: #fff;
-      animation-play-state: paused;
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.15);
-        opacity: 0.7;
-      }
-    }
-
+    /* Responsive */
     @media (max-width: 768px) {
       header {
         padding: 20px;
       }
-
       nav ul {
         flex-direction: column;
         gap: 15px;
         align-items: center;
         padding: 10px 0;
       }
-
       nav a {
         font-size: 18px;
       }
-
       section {
         font-size: 8vw;
         letter-spacing: 1px;
         padding: 120px 20px 40px;
       }
-
-      #home h1 {
+      #home h1, #certificate {
         font-size: 16vw;
       }
-
       .hero-text h4 {
         font-size: 20px;
       }
-
       .hero-text h1 {
         font-size: 30px;
         text-align: center;
       }
-
-      .hero-text p {
+      #animated-text {
         font-size: 15px;
         padding: 0 10px;
         text-align: justify;
         line-height: 1.7;
+        max-width: 90vw;
       }
-
       .social-icons {
         flex-wrap: wrap;
         gap: 12px;
       }
-
       .social-icons a {
         width: 40px;
         height: 40px;
@@ -256,10 +253,7 @@
   <section id="certificate">CERTIFICATE</section>
 
   <script>
-    const texts = {
-      en: "A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program."
-    };
-
+    const texts = "A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program.";
     const highlights = ["Telkom", "Dibimbing"];
     const container = document.getElementById("animated-text");
 
@@ -298,7 +292,6 @@
           i++;
         }
       }
-
       container.innerHTML = "";
       elements.forEach((el, idx) => {
         container.appendChild(el);
@@ -328,7 +321,7 @@
       });
     }
 
-    renderWords(texts.en);
+    renderWords(texts);
   </script>
 </body>
 </html>
