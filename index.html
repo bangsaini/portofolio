@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portofolio Smooth Scroll</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
 
@@ -25,7 +26,7 @@
       justify-content: center;
       align-items: center;
       font-family: 'Cinzel', serif;
-      font-size: 140px; /* dibesarkan */
+      font-size: 80px;
       letter-spacing: 3px;
       color: #f5e9c7;
       text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
@@ -33,19 +34,109 @@
       padding: 0 10px;
     }
 
-    /* RESPONSIVE UNTUK LAYAR KECIL (HP) */
+    /* Slide TENTANG SAYA khusus */
+    #about {
+      flex-direction: column;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .hero-text h4 {
+      color: #29ab87;
+      font-weight: bold;
+      font-size: 28px;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      transition: color 0.3s ease;
+    }
+
+    .hero-text h1:hover {
+      color: #29ab87;
+      cursor: pointer;
+    }
+
+    .hero-text p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 22px;
+    }
+
+    .social-icons a {
+      color: #29ab87;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
     @media (max-width: 768px) {
       section {
-        font-size: 8vw; /* dibesarkan */
-        letter-spacing: 1px;
+        font-size: 10vw;
+      }
+
+      .hero-text h1 {
+        font-size: 8vw;
+      }
+
+      .hero-text h4 {
+        font-size: 5vw;
+      }
+
+      .hero-text p {
+        font-size: 4vw;
+        padding: 0 20px;
+      }
+
+      .social-icons {
+        font-size: 6vw;
       }
     }
   </style>
 </head>
 <body>
+
   <section>PORTOFOLIO</section>
-  <section>TENTANG SAYA</section>
+
+  <section id="about">
+    <div class="hero-text">
+      <h4>WELCOME!</h4>
+      <h1>I'm Ariel Saradilla</h1>
+      <p>
+        A student currently in fourth semester at Telkom University Bandung majoring in Data Science,
+        have an interest in data analytics and machine learning, and also currently participating
+        in the Dibimbing Data Science Bootcamp Batch 33 A program.
+      </p>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+        <a href="#"><i class="fa-brands fa-kaggle"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
   <section>PROJECT</section>
   <section>KONTAK</section>
+
 </body>
 </html>
