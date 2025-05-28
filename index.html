@@ -1,373 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Portfolio</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Smooth Scroll</title>
   <style>
-    * {
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
       height: 100%;
-      background-color: #0f1123;
-      color: #fff;
-      font-family: "Segoe UI", sans-serif;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
+      overflow-y: scroll;
+      background-color: #0b0d1a;
     }
 
-    header {
-      padding: 30px 60px;
-      position: relative;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: color 0.3s, font-size 0.3s;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      color: #29ab87;
-      font-size: 20px;
-    }
-
-    .lang-select {
-      position: absolute;
-      top: 30px;
-      right: 60px;
-      display: flex;
-      gap: 15px;
-    }
-
-    .lang-circle {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2.5px solid;
-      cursor: pointer;
+    section {
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
-      font-weight: bold;
-      user-select: none;
-      font-size: 18px;
-      line-height: 1;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .lang-indo {
-      border-color: #e63946;
-      color: #e63946;
-    }
-
-    .lang-english {
-      border-color: #008ecc;
-      color: #008ecc;
-    }
-
-    .lang-circle:hover {
-      background-color: currentColor;
-      color: #fff;
-    }
-
-    .section {
-      display: none;
-      padding: 20px;
-    }
-
-    .active {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex: 1;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .hero-text h4 {
-      color: #29ab87;
-      font-weight: bold;
-      font-size: 28px;
-      margin-bottom: 15px;
-      letter-spacing: 2px;
-    }
-
-    .hero-text h1 {
-      font-size: 64px;
-      font-weight: bold;
-      margin-bottom: 25px;
-      transition: color 0.3s ease;
-    }
-
-    .hero-text h1:hover {
-      color: #29ab87;
-      cursor: pointer;
-    }
-
-    .hero-text p {
-      max-width: 700px;
-      margin: 0 auto 40px;
-      font-size: 20px;
-      line-height: 1.8;
-      color: #ccc;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .word, .phrase {
-      display: inline-block;
-      transition: transform 0.3s ease, color 0.3s ease;
-      cursor: default;
-    }
-
-    .hovered {
-      transform: scale(1.4);
-      color: #29ab87;
-      z-index: 10;
-      position: relative;
-    }
-
-    .shift-left {
-      transform: translateX(-20px);
-      color: #666;
-    }
-
-    .shift-right {
-      transform: translateX(20px);
-      color: #666;
-    }
-
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .social-icons a {
-      color: #29ab87;
-      border: 1px solid #29ab87;
-      border-radius: 50%;
-      padding: 12px;
-      width: 42px;
-      height: 42px;
-      font-size: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.3s, color 0.3s;
-      animation: pulse 2.5s ease-in-out infinite;
-      text-decoration: none;
-    }
-
-    .social-icons a:hover {
-      background-color: #29ab87;
-      color: #fff;
-      animation-play-state: paused;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.15);
-        opacity: 0.7;
-      }
-    }
-
-    @media (max-width: 768px) {
-      header {
-        padding: 20px;
-      }
-      nav ul {
-        flex-direction: column;
-        gap: 15px;
-      }
-      .hero-text h4 {
-        font-size: 22px;
-      }
-      .hero-text h1 {
-        font-size: 36px;
-      }
-      .hero-text p {
-        font-size: 16px;
-      }
-      .lang-select {
-        top: 20px;
-        right: 20px;
-      }
+      font-family: 'Cinzel', serif;
+      font-size: 60px;
+      letter-spacing: 3px;
+      color: #f5e9c7;
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="showSection('home')">HOME</a></li>
-        <li><a href="#" onclick="showSection('about')">ABOUT</a></li>
-        <li><a href="#" onclick="showSection('project')">PROJECT</a></li>
-        <li><a href="#" onclick="showSection('experience')">EXPERIENCE</a></li>
-        <li><a href="#" onclick="showSection('skills')">SKILLS</a></li>
-        <li><a href="#" onclick="showSection('certificate')">CERTIFICATE</a></li>
-      </ul>
-    </nav>
-    <div class="lang-select">
-      <div class="lang-circle lang-indo" title="Bahasa Indonesia">ID</div>
-      <div class="lang-circle lang-english" title="English">EN</div>
-    </div>
-  </header>
-
-  <!-- HOME Section -->
-  <div id="home" class="section active">
-    <div class="hero-text">
-      <h4>WELCOME!</h4>
-      <h1>I'm Ariel Saradilla</h1>
-      <p id="animated-text"></p>
-      <div class="social-icons">
-        <a href="#"><i class="fa-brands fa-github"></i></a>
-        <a href="#"><i class="fa-brands fa-kaggle"></i></a>
-        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Other sections -->
-  <div id="about" class="section"></div>
-  <div id="project" class="section"></div>
-  <div id="experience" class="section"></div>
-  <div id="skills" class="section"></div>
-  <div id="certificate" class="section">
-    <h2>Certificates</h2>
-    <p>This is the certificate section content.</p>
-  </div>
-
-  <script>
-    const texts = {
-      en: "A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program.",
-      id: "Mahasiswa semester empat di Telkom University Bandung jurusan Data Science, memiliki minat di bidang analisis data dan pembelajaran mesin, dan saat ini sedang mengikuti program Dibimbing Data Science Bootcamp Batch 33 A."
-    };
-    const highlights = ["Telkom", "Dibimbing"];
-    const container = document.getElementById("animated-text");
-    const heading4 = document.querySelector(".hero-text h4");
-    const heading1 = document.querySelector(".hero-text h1");
-
-    function renderWords(textToRender) {
-      const words = textToRender.split(" ");
-      const elements = [];
-      let i = 0;
-      while (i < words.length) {
-        let matched = false;
-        for (const phrase of highlights) {
-          const phraseWords = phrase.split(" ");
-          const slice = words.slice(i, i + phraseWords.length).join(" ");
-          if (slice === phrase) {
-            const span = document.createElement("span");
-            span.className = "phrase";
-            span.textContent = phrase;
-            span.addEventListener("mouseenter", () => {
-              span.classList.add("hovered");
-              applyShiftEffect(elements.indexOf(span));
-            });
-            span.addEventListener("mouseleave", () => {
-              span.classList.remove("hovered");
-              clearShiftEffect();
-            });
-            elements.push(span);
-            i += phraseWords.length;
-            matched = true;
-            break;
-          }
-        }
-        if (!matched) {
-          const span = document.createElement("span");
-          span.className = "word";
-          span.textContent = words[i];
-          elements.push(span);
-          i++;
-        }
-      }
-
-      container.innerHTML = "";
-      elements.forEach((el, idx) => {
-        container.appendChild(el);
-        if (idx < elements.length - 1) {
-          container.appendChild(document.createTextNode(" "));
-        }
-      });
-    }
-
-    function applyShiftEffect(activeIndex) {
-      const all = document.querySelectorAll(".word, .phrase");
-      all.forEach((el, i) => {
-        if (i < activeIndex) el.classList.add("shift-left");
-        else if (i > activeIndex) el.classList.add("shift-right");
-        else {
-          el.classList.remove("shift-left");
-          el.classList.remove("shift-right");
-        }
-      });
-    }
-
-    function clearShiftEffect() {
-      const all = document.querySelectorAll(".word, .phrase");
-      all.forEach((el) => {
-        el.classList.remove("shift-left");
-        el.classList.remove("shift-right");
-      });
-    }
-
-    function setLanguage(lang) {
-      if (lang === "id") {
-        renderWords(texts.id);
-        heading4.textContent = "SELAMAT DATANG!";
-        heading1.textContent = "Saya Ariel Saradilla";
-      } else {
-        renderWords(texts.en);
-        heading4.textContent = "WELCOME!";
-        heading1.textContent = "I'm Ariel Saradilla";
-      }
-      localStorage.setItem("preferredLang", lang);
-    }
-
-    const savedLang = localStorage.getItem("preferredLang") || "en";
-    setLanguage(savedLang);
-
-    document.querySelector(".lang-indo").addEventListener("click", () => setLanguage("id"));
-    document.querySelector(".lang-english").addEventListener("click", () => setLanguage("en"));
-
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-    }
-
-    showSection('home');
-  </script>
+  <section>PORTOFOLIO</section>
+  <section>TENTANG SAYA</section>
+  <section>PROJECT</section>
+  <section>KONTAK</section>
 </body>
 </html>
