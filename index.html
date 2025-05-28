@@ -3,45 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Smooth Scroll</title>
+  <title>Responsive Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
-      height: 100%;
-      overflow-y: scroll;
-      background-color: #0b0d1a;
+      box-sizing: border-box;
     }
-
-    section {
-      height: 100vh;
+    html, body {
+      height: 100%;
+      background-color: #0f1123;
+      color: #fff;
+      font-family: "Segoe UI", sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 30px 60px;
+      position: relative;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s, font-size 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover {
+      color: #29ab87;
+      font-size: 20px;
+    }
+    .lang-select {
+      position: absolute;
+      top: 30px;
+      right: 60px;
+      display: flex;
+      gap: 15px;
+    }
+    .lang-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2.5px solid;
+      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Cinzel', serif;
-      font-size: 80px;
-      letter-spacing: 3px;
-      color: #f5e9c7;
-      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
-      text-align: center;
-      padding: 0 10px;
+      color: white;
+      font-weight: bold;
+      user-select: none;
+      font-size: 18px;
+      line-height: 1;
+      transition: background-color 0.3s, color 0.3s;
     }
-
-    /* Slide TENTANG SAYA khusus */
-    #about {
+    .section {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: flex;
       flex-direction: column;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 16px;
-      color: #fff;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      text-align: center;
+      padding: 40px 20px;
     }
-
     .hero-text h4 {
       color: #29ab87;
       font-weight: bold;
@@ -49,82 +86,82 @@
       margin-bottom: 15px;
       letter-spacing: 2px;
     }
-
     .hero-text h1 {
-      font-size: 48px;
+      font-size: 64px;
       font-weight: bold;
       margin-bottom: 25px;
       transition: color 0.3s ease;
     }
-
     .hero-text h1:hover {
       color: #29ab87;
       cursor: pointer;
     }
-
     .hero-text p {
       max-width: 700px;
       margin: 0 auto 40px;
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.8;
       color: #ccc;
-      text-align: center;
     }
-
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      font-size: 22px;
+      gap: 10px;
     }
-
     .social-icons a {
       color: #29ab87;
+      border: 1px solid #29ab87;
+      border-radius: 50%;
+      padding: 12px;
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s, color 0.3s;
+      animation: pulse 2.5s ease-in-out infinite;
       text-decoration: none;
-      transition: transform 0.3s;
     }
-
     .social-icons a:hover {
-      transform: scale(1.2);
+      background-color: #29ab87;
+      color: #fff;
+      animation-play-state: paused;
     }
-
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.7; }
+    }
     @media (max-width: 768px) {
-      section {
-        font-size: 10vw;
-      }
-
-      .hero-text h1 {
-        font-size: 8vw;
-      }
-
-      .hero-text h4 {
-        font-size: 5vw;
-      }
-
-      .hero-text p {
-        font-size: 4vw;
-        padding: 0 20px;
-      }
-
-      .social-icons {
-        font-size: 6vw;
-      }
+      header { padding: 20px; }
+      nav ul { flex-direction: column; gap: 15px; }
+      .hero-text h4 { font-size: 22px; }
+      .hero-text h1 { font-size: 36px; }
+      .hero-text p { font-size: 16px; }
+      .lang-select { top: 20px; right: 20px; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <nav>
+      <ul>
+        <li><a onclick="showSection('home')">HOME</a></li>
+        <li><a onclick="showSection('about')">ABOUT</a></li>
+        <li><a onclick="showSection('project')">PROJECT</a></li>
+        <li><a onclick="showSection('experience')">EXPERIENCE</a></li>
+        <li><a onclick="showSection('skills')">SKILLS</a></li>
+        <li><a onclick="showSection('certificate')">CERTIFICATE</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <section>PORTOFOLIO</section>
-
-  <section id="about">
+  <!-- HOME Section -->
+  <div id="home" class="section active">
     <div class="hero-text">
       <h4>WELCOME!</h4>
       <h1>I'm Ariel Saradilla</h1>
-      <p>
-        A student currently in fourth semester at Telkom University Bandung majoring in Data Science,
-        have an interest in data analytics and machine learning, and also currently participating
-        in the Dibimbing Data Science Bootcamp Batch 33 A program.
-      </p>
+      <p id="animated-text">A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program.</p>
       <div class="social-icons">
         <a href="#"><i class="fa-brands fa-github"></i></a>
         <a href="#"><i class="fa-brands fa-kaggle"></i></a>
@@ -133,10 +170,27 @@
         <a href="#"><i class="fa-brands fa-linkedin"></i></a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section>PROJECT</section>
-  <section>KONTAK</section>
+  <!-- ABOUT Section -->
+  <div id="about" class="section">
+    <div class="hero-text">
+      <h4>ABOUT ME</h4>
+      <p>I am passionate about delivering data-driven solutions through analytics, and currently honing my skills through real-world bootcamp projects and certifications.</p>
+    </div>
+  </div>
 
+  <!-- Additional Sections -->
+  <div id="project" class="section"><h1>PROJECT</h1></div>
+  <div id="experience" class="section"><h1>EXPERIENCE</h1></div>
+  <div id="skills" class="section"><h1>SKILLS</h1></div>
+  <div id="certificate" class="section"><h1>CERTIFICATE</h1></div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 </body>
 </html>
