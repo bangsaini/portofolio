@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Smooth Scroll</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      overflow-y: scroll;
+      font-family: sans-serif;
       background-color: #0b0d1a;
-    }
-
-    section {
-      height: 100vh;
+      color: #f5e9c7;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Cinzel', serif;
-      font-size: 60px;
-      letter-spacing: 3px;
-      color: #f5e9c7;
-      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 5vw; /* Ukuran huruf akan menyesuaikan lebar layar */
+      letter-spacing: 2px;
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 8vw;
+      }
     }
   </style>
 </head>
 <body>
-  <section>PORTOFOLIO</section>
-  <section>TENTANG SAYA</section>
-  <section>PROJECT</section>
-  <section>KONTAK</section>
+  <h1>PORTOFOLIO</h1>
 </body>
 </html>
