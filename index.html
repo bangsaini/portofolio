@@ -105,6 +105,29 @@
       color: #ccc;
     }
 
+    .word, .phrase {
+      display: inline-block;
+      transition: transform 0.3s ease, color 0.3s ease;
+      cursor: default;
+    }
+
+    .hovered {
+      transform: scale(1.4);
+      color: #29ab87;
+      z-index: 10;
+      position: relative;
+    }
+
+    .shift-left {
+      transform: translateX(-20px);
+      color: #666;
+    }
+
+    .shift-right {
+      transform: translateX(20px);
+      color: #666;
+    }
+
     .social-icons {
       display: flex;
       justify-content: center;
@@ -199,7 +222,7 @@
     <div class="hero-text">
       <h4>WELCOME!</h4>
       <h1>I'm Ariel Saradilla</h1>
-      <p>A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program.</p>
+      <p id="animated-text"></p>
       <div class="social-icons">
         <a href="#"><i class="fa-brands fa-github"></i></a>
         <a href="#"><i class="fa-brands fa-kaggle"></i></a>
@@ -215,5 +238,36 @@
   <section id="skills">SKILLS</section>
   <section id="certificate">CERTIFICATE</section>
 
+  <script>
+    const texts = {
+      en: "A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program."
+    };
+    const highlights = ["Telkom", "Dibimbing"];
+    const container = document.getElementById("animated-text");
+    const words = texts.en.split(" ");
+
+    container.innerHTML = "";
+    words.forEach((word, index) => {
+      const span = document.createElement("span");
+      span.textContent = word + " ";
+      span.classList.add("word");
+
+      if (highlights.includes(word.replace(/[^a-zA-Z]/g, ""))) {
+        span.classList.add("phrase");
+        span.addEventListener("mouseenter", () => {
+          span.classList.add("hovered");
+          if (span.previousSibling) span.previousSibling.classList.add("shift-left");
+          if (span.nextSibling) span.nextSibling.classList.add("shift-right");
+        });
+        span.addEventListener("mouseleave", () => {
+          span.classList.remove("hovered");
+          if (span.previousSibling) span.previousSibling.classList.remove("shift-left");
+          if (span.nextSibling) span.nextSibling.classList.remove("shift-right");
+        });
+      }
+
+      container.appendChild(span);
+    });
+  </script>
 </body>
 </html>
