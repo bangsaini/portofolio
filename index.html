@@ -242,32 +242,76 @@
     const texts = {
       en: "A student currently in fourth semester at Telkom University Bandung majoring in Data Science, have an interest in data analytics and machine learning, and also currently participating in the Dibimbing Data Science Bootcamp Batch 33 A program."
     };
+
     const highlights = ["Telkom", "Dibimbing"];
     const container = document.getElementById("animated-text");
-    const words = texts.en.split(" ");
 
-    container.innerHTML = "";
-    words.forEach((word, index) => {
-      const span = document.createElement("span");
-      span.textContent = word + " ";
-      span.classList.add("word");
-
-      if (highlights.includes(word.replace(/[^a-zA-Z]/g, ""))) {
-        span.classList.add("phrase");
-        span.addEventListener("mouseenter", () => {
-          span.classList.add("hovered");
-          if (span.previousSibling) span.previousSibling.classList.add("shift-left");
-          if (span.nextSibling) span.nextSibling.classList.add("shift-right");
-        });
-        span.addEventListener("mouseleave", () => {
-          span.classList.remove("hovered");
-          if (span.previousSibling) span.previousSibling.classList.remove("shift-left");
-          if (span.nextSibling) span.nextSibling.classList.remove("shift-right");
-        });
+    function renderWords(textToRender) {
+      const words = textToRender.split(" ");
+      const elements = [];
+      let i = 0;
+      while (i < words.length) {
+        let matched = false;
+        for (const phrase of highlights) {
+          const phraseWords = phrase.split(" ");
+          const slice = words.slice(i, i + phraseWords.length).join(" ");
+          if (slice === phrase) {
+            const span = document.createElement("span");
+            span.className = "phrase";
+            span.textContent = phrase;
+            span.addEventListener("mouseenter", () => {
+              span.classList.add("hovered");
+              applyShiftEffect(elements.indexOf(span));
+            });
+            span.addEventListener("mouseleave", () => {
+              span.classList.remove("hovered");
+              clearShiftEffect();
+            });
+            elements.push(span);
+            i += phraseWords.length;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          const span = document.createElement("span");
+          span.className = "word";
+          span.textContent = words[i];
+          elements.push(span);
+          i++;
+        }
       }
 
-      container.appendChild(span);
-    });
+      container.innerHTML = "";
+      elements.forEach((el, idx) => {
+        container.appendChild(el);
+        if (idx < elements.length - 1) {
+          container.appendChild(document.createTextNode(" "));
+        }
+      });
+    }
+
+    function applyShiftEffect(activeIndex) {
+      const all = document.querySelectorAll(".word, .phrase");
+      all.forEach((el, i) => {
+        if (i < activeIndex) el.classList.add("shift-left");
+        else if (i > activeIndex) el.classList.add("shift-right");
+        else {
+          el.classList.remove("shift-left");
+          el.classList.remove("shift-right");
+        }
+      });
+    }
+
+    function clearShiftEffect() {
+      const all = document.querySelectorAll(".word, .phrase");
+      all.forEach((el) => {
+        el.classList.remove("shift-left");
+        el.classList.remove("shift-right");
+      });
+    }
+
+    renderWords(texts.en);
   </script>
 </body>
 </html>
