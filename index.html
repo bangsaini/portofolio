@@ -3,34 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Portfolio</title>
+  <title>Portofolio Smooth Scroll</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
     *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    html, body {
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
       height: 100%;
-      background-color: #0f1123;
+      overflow-y: scroll;
+      background-color: #0b0d1a;
       color: #fff;
       font-family: "Segoe UI", sans-serif;
     }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
+
     header {
       padding: 30px 60px;
-      position: relative;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #0b0d1a;
+      z-index: 999;
     }
+
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
       gap: 30px;
     }
+
     nav a {
       color: #fff;
       text-decoration: none;
@@ -39,23 +52,27 @@
       transition: color 0.3s, font-size 0.3s;
       cursor: pointer;
     }
+
     nav a:hover {
       color: #29ab87;
       font-size: 20px;
     }
-    .section {
-      display: none;
-      padding: 20px;
-    }
-    .active {
+
+    section {
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex: 1;
+      font-family: 'Cinzel', serif;
+      font-size: 60px;
+      letter-spacing: 3px;
+      color: #f5e9c7;
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+      padding: 80px 20px 20px;
+      flex-direction: column;
       text-align: center;
-      padding: 40px 20px;
     }
+
     .hero-text h4 {
       color: #29ab87;
       font-weight: bold;
@@ -63,16 +80,19 @@
       margin-bottom: 15px;
       letter-spacing: 2px;
     }
+
     .hero-text h1 {
       font-size: 64px;
       font-weight: bold;
       margin-bottom: 25px;
       transition: color 0.3s ease;
     }
+
     .hero-text h1:hover {
       color: #29ab87;
       cursor: pointer;
     }
+
     .hero-text p {
       max-width: 700px;
       margin: 0 auto 40px;
@@ -80,11 +100,13 @@
       line-height: 1.8;
       color: #ccc;
     }
+
     .social-icons {
       display: flex;
       justify-content: center;
       gap: 10px;
     }
+
     .social-icons a {
       color: #29ab87;
       border: 1px solid #29ab87;
@@ -100,21 +122,49 @@
       animation: pulse 2.5s ease-in-out infinite;
       text-decoration: none;
     }
+
     .social-icons a:hover {
       background-color: #29ab87;
       color: #fff;
       animation-play-state: paused;
     }
+
     @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.7; }
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.15);
+        opacity: 0.7;
+      }
     }
+
     @media (max-width: 768px) {
-      header { padding: 20px; }
-      nav ul { flex-direction: column; gap: 15px; }
-      .hero-text h4 { font-size: 22px; }
-      .hero-text h1 { font-size: 36px; }
-      .hero-text p { font-size: 16px; }
+      header {
+        padding: 20px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      section {
+        font-size: 8vw;
+      }
+
+      .hero-text h4 {
+        font-size: 22px;
+      }
+
+      .hero-text h1 {
+        font-size: 36px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -122,26 +172,24 @@
   <header>
     <nav>
       <ul>
-        <li><a onclick="showSection('home')">PORTOFOLIO</a></li>
-        <li><a onclick="showSection('about')">ABOUT</a></li>
-        <li><a onclick="showSection('project')">PROJECT</a></li>
-        <li><a onclick="showSection('experience')">EXPERIENCE</a></li>
-        <li><a onclick="showSection('skills')">SKILLS</a></li>
-        <li><a onclick="showSection('certificate')">CERTIFICATE</a></li>
+        <li><a href="#home">PORTOFOLIO</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#project">PROJECT</a></li>
+        <li><a href="#experience">EXPERIENCE</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#certificate">CERTIFICATE</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- PORTOFOLIO Section -->
-  <div id="home" class="section active">
+  <section id="home">
     <div class="hero-text">
       <h1>PORTOFOLIO</h1>
       <p>Welcome to my personal site! Scroll through to know more about me.</p>
     </div>
-  </div>
+  </section>
 
-  <!-- ABOUT Section -->
-  <div id="about" class="section">
+  <section id="about">
     <div class="hero-text">
       <h4>WELCOME!</h4>
       <h1>I'm Ariel Saradilla</h1>
@@ -154,19 +202,12 @@
         <a href="#"><i class="fa-brands fa-linkedin"></i></a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Additional Sections -->
-  <div id="project" class="section"><h1>PROJECT</h1></div>
-  <div id="experience" class="section"><h1>EXPERIENCE</h1></div>
-  <div id="skills" class="section"><h1>SKILLS</h1></div>
-  <div id="certificate" class="section"><h1>CERTIFICATE</h1></div>
+  <section id="project">PROJECT</section>
+  <section id="experience">EXPERIENCE</section>
+  <section id="skills">SKILLS</section>
+  <section id="certificate">CERTIFICATE</section>
 
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-  </script>
 </body>
 </html>
